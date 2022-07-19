@@ -1,0 +1,17 @@
+{
+    "name": "betop/packagist",
+    "autoload": {
+        "psr-4": {
+            "Betop\\Packagist\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alberto Rocha Pinalli",
+            "email": "betopinalli@gmail.com"
+        }
+    ],
+    "require": {
+        "betop/digital-cep-php-composer": "^1.0"
+    }
+}

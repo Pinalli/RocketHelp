@@ -1,0 +1,5 @@
+package com.pinalli.query_sales.services;
+
+public class SaleService {
+
+}

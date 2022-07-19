@@ -1,0 +1,11 @@
+package com.pinalli.query_sales.services;
+
+import java.util.List;
+
+import com.pinalli.query_sales.entities.Sale;
+
+public class SaleService {
+	
+	public List<Sale> findSales()
+}
+}

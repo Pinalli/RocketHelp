@@ -1,0 +1,5 @@
+package com.pinalli.query_sales.config;
+
+public class SecurityConfig {
+
+}
