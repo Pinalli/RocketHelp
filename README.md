@@ -5,8 +5,8 @@
 
 ### Screen Home <hr>
 
-
-
-  <di>
-  <img height="500" src="https://user-images.githubusercontent.com/18580532/179643333-b79538c7-d1b7-4acf-bfb8-61e26e343595.png?w=200 "
+<di>
+<img height="500" src="https://user-images.githubusercontent.com/18580532/179754741-b77dc94f-30dc-4a13-a803-97add793d0f5.png?"
  </div
+ <div>
+ 
