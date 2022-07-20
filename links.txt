@@ -1,1 +1,8 @@
 https://reactnavigation.org/
+
+https://react-native.rocketseat.dev/
+
+https://evento.rocketseat.com.br/ignite-lab/react-native/desafios/edicao/2
+
+
+https://rnfirebase.io/
