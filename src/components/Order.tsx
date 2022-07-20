@@ -32,7 +32,7 @@ export function Order({data, ...rest}: Props) {
         <Box h="full" w={2} bg={statusColor}/>
 
         <VStack flex={1} my={5} ml={5} >            
-             <Text color="whiite" fontSize="md">
+             <Text color="white" fontSize="md">
              Patrimony{data.patrimony}
              </Text>
              <HStack alignItems="center">
