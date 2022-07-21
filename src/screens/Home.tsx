@@ -1,25 +1,25 @@
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {Alert} from 'react-native'
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore'
 import {useNavigation} from '@react-navigation/native'
 import { HStack,IconButton,VStack, useTheme, Text, Heading, FlatList, Center } from 'native-base';
 import { SignOut } from 'phosphor-react-native';
 import { ChatTeardropText} from 'phosphor-react-native';
+import {dateFormat} from '../utils/firestoreDateFormat'
 import Logo from '../assets/logo_secondary.svg';
 import {Filter} from '../components/Filter';
+import { Loading } from '../components/Loading';
 import {Order, OrderProps} from '../components/Order';
 import { Button, } from '../components/Button';
 
 
-export function Home() {
-  const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open');
-  const [orders, setOrders] = useState<OrderProps[]>([
-    {
-    id:'1',
-    patrimony:'123456789',
-    when:'2022-07-19 at 10:00 am',
-    status:'open'
-    }
 
+export function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open');
+  const [orders, setOrders] = useState<OrderProps[]>([  
   ]);
 
   const navigation = useNavigation();
@@ -32,6 +32,43 @@ export function Home() {
   function handelOpenDetails(orderId:string) {
     navigation.navigate('details', {orderId});
   }
+
+  function handleLogout() {
+    auth()
+    .signOut()
+    .catch(error => {
+      console.log(error);
+      return Alert.alert('Logout', 'Something went wrong')
+    });
+  }
+
+  useEffect(() => {
+
+    setIsLoading(true);
+
+
+    const subscriber = firestore()
+    .collection('orders')
+    .where('status', '==', statusSelected)
+    .onSnapshot(snapshot => {
+      const data = snapshot.docs.map(doc => {
+         const {patrimony, description, status, created_at} = doc.data();
+         return {
+          id: doc.id,
+          patrimony,
+          description,
+          status,
+          when: dateFormat(created_at)
+        }
+      });
+      setOrders(data);
+    setIsLoading(false);
+
+    });
+
+    return subscriber
+    
+  },[statusSelected]);
 
 
   return (
@@ -49,6 +86,7 @@ export function Home() {
 
         <IconButton
           icon={<SignOut size={26} color={colors.gray[300]}/>}
+          onPress={handleLogout}
         />
         </HStack>
        <VStack flex={1} px={6}>
@@ -76,6 +114,9 @@ export function Home() {
         />              
           
           </HStack>
+
+    {
+          isLoading ? <Loading/> : 
           <FlatList
               data={orders}
               keyExtractor={(item) => item.id}
@@ -91,7 +132,8 @@ export function Home() {
                 </Center>
 
               )}    
-          />       
+          />     
+    }  
           <Button title="New solicitation" onPress={handleNewOrder}/>        
     </VStack>
     </VStack>
