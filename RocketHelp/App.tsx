@@ -1,7 +1,7 @@
 import { NativeBaseProvider, Box, StatusBar } from "native-base";
 import {useFonts, Roboto_400Regular,Roboto_700Bold }  from '@expo-google-fonts/roboto';
 import {THEME} from './src/styles/theme';
-import { SignIn } from './src/screens/Signin';
+import { Routes } from './src/routes';
 import { Loading } from "./src/components/Loading";
 
 
@@ -17,7 +17,7 @@ return (
         translucent
       />
       {/* quando usar varival envolve por chaves */}
-     {fontsLoaded ? <SignIn/> : <Loading/>}
+     {fontsLoaded ? <Routes/> : <Loading/>}
     </NativeBaseProvider>
   );
 }
